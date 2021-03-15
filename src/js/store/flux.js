@@ -1,11 +1,18 @@
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
-			//Your data structures, A.K.A Entities
+			contacs: []
 		},
 		actions: {
-			//(Arrow) Functions that update the Store
-			// Remember to use the scope: scope.state.store & scope.setState()
+			loadContact() {
+				fetch(url + "agenda/the_plug")
+					.then(response => response.json())
+					.then(response => response.json())
+					.then(result => {
+						console.log("Get Contact", result), setStore({ contacts: result });
+					})
+					.catch(e => console.error(e));
+			}
 		}
 	};
 };
