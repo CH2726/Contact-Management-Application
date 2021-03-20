@@ -13,7 +13,7 @@ export const ContactCard = props => {
     return (
         <div>
             {store.contacts &&
-                store.contacts.map(e, index) => {
+                store.contacts.map((e, index) => {
                     return (
             <li key={index} className="list-group-item">
                 <div className="row w-100">
@@ -72,4 +72,4 @@ ContactCard.propTypes = {
 
 ContactCard.defaultProps = {
     onDelete: null
-}:
+}
