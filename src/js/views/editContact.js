@@ -1,17 +1,21 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
 
-export const AddContact = () => {
-	const { actions } = useContext(Context);
-	const [phone, setPhone] = useState("");
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [address, setAddress] = useState("");
+export const EditContact = props => {
+	const { store, actions } = useContext(Context);
+	let short = store.contacts[props.match.params.index];
+	let id = props.match.params.id;
+	const [phone, setPhone] = useState(short.phone);
+	const [name, setName] = useState(short.full_name);
+	const [email, setEmail] = useState(short.email);
+	const [address, setAdress] = useState(short.address);
+	console.log("try", store.contacts);
 	return (
 		<div className="container">
 			<div>
-				<h1 className="text-center mt-5">Add a new contact</h1>
+				<h1 className="text-center mt-5">Edit contact</h1>
 				<form>
 					<div className="form-group">
 						<label>Full Name</label>
@@ -19,6 +23,7 @@ export const AddContact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Full Name"
+							defaultValue={store.contacts[props.match.params.index].full_name}
 							onChange={e => setName(e.target.value)}
 						/>
 					</div>
@@ -28,6 +33,7 @@ export const AddContact = () => {
 							type="email"
 							className="form-control"
 							placeholder="Enter email"
+							defaultValue={store.contacts[props.match.params.index].email}
 							onChange={e => setEmail(e.target.value)}
 						/>
 					</div>
@@ -37,6 +43,7 @@ export const AddContact = () => {
 							type="phone"
 							className="form-control"
 							placeholder="Enter phone"
+							defaultValue={store.contacts[props.match.params.index].phone}
 							onChange={e => setPhone(e.target.value)}
 						/>
 					</div>
@@ -46,19 +53,13 @@ export const AddContact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Enter address"
+							defaultValue={store.contacts[props.match.params.index].address}
 							onChange={e => setAddress(e.target.value)}
 						/>
 					</div>
-					<Link to={"/"}>
-						<button
-							type="button"
-							className="btn btn-primary form-control"
-							onClick={() => {
-								actions.addContact(name, phone, email, address);
-							}}>
-							save
-						</button>
-					</Link>
+					<button type="button" className="btn btn-primary form-control" onClick={console.log("abcdefg")}>
+						save
+					</button>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>
@@ -66,4 +67,8 @@ export const AddContact = () => {
 			</div>
 		</div>
 	);
+};
+
+EditContact.propTypes = {
+	match: PropTypes.object
 };
