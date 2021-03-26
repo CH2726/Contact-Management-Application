@@ -10,7 +10,7 @@ export const EditContact = props => {
 	const [phone, setPhone] = useState(short.phone);
 	const [name, setName] = useState(short.full_name);
 	const [email, setEmail] = useState(short.email);
-	const [address, setAdress] = useState(short.address);
+	const [address, setAddress] = useState(short.address);
 	console.log("try", store.contacts);
 	return (
 		<div className="container">
@@ -57,9 +57,14 @@ export const EditContact = props => {
 							onChange={e => setAddress(e.target.value)}
 						/>
 					</div>
-					<button type="button" className="btn btn-primary form-control" onClick={console.log("abcdefg")}>
-						save
-					</button>
+					<Link to={"/"}>
+						<button
+							type="button"
+							className="btn btn-primary form-control"
+							onClick={() => actions.editContact(id, name, phone, email, address)}>
+							save
+						</button>
+					</Link>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>
